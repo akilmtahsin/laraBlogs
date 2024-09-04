@@ -17,5 +17,5 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [BlogController::class, 'index'])->name('view.blogs');
-Route::get('blogs/create', [BlogController::class, 'create'])->name('blogs.create');
-Route::post('blogs/store', [BlogController::class, 'store'])->name('blogs.store');
+Route::get('blog/create', [BlogController::class, 'create'])->name('blog.create');
+Route::post('blog/store', [BlogController::class, 'store'])->name('blog.store');
