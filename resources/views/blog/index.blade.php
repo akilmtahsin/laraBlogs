@@ -1,36 +1,46 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Lara Blogs | Home</title>
-  <style>
-    body{
-      padding: 0;
-      margin: 0;
-      font-family: Aptos, sans-serif;
-      min-height: 100vh;
-    }
-  </style>
-   @vite('resources/css/app.css')
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playwrite+IS&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
+  @vite('resources/css/app.css')
 </head>
+
 <body>
   <header style="background-color: #dae4f5;  " class=" h-20 ">
     <nav style="display: flex; justify-content: space-between; align-items: center; padding: 20px; ">
-      <h1 style="display: inline;">Welcome to Lara Blogs</h1>
+      <p class="logo font-light">LaraBlogs</p>
       <div style=" display: flex; justify-content: center; align-items: center;  height: 40px; width:200px; border-radius: 3px; background-color: #4287f5 ; ">
-        <a style="text-decoration: none; color: white; font-weight: 900; " href="{{ route('blog.create') }}">Create Blog</a>
+        <a class="" style="text-decoration: none; color: white; font-weight: 900; " href="{{ route('blog.create') }}">Create Blog</a>
       </div>
     </nav>
   </header>
-  
-    <main style="min-height: calc(100vh - 80px - 36px );">
-      <section>
-        <h2>Latest Blogs</h2>
-    
-      </section>
-    </main>
 
-    <footer class="bg-neutral-400 h-11 w-auto flex justify-center py-3 ">
-      <p class=" inline-block ">&copy;{{ date('Y') }} LaraBlogs | All rights reserved.</p>
-    </footer>
+  <main class=" bg-white " style=" min-height: calc(100vh - 80px - 36px ); ">
+    <section>
+      <h2>Latest Blogs</h2>
+      <div class="flex flex-wrap flex-col items-center  ">
+        @foreach($blogs as $blog)
+        <div class=" w-[800px] m-3 bg-white rounded-md p-2 shadow-lg ">
+          <img src="{{ asset('upload/blog_images/' . $blog->image) }}" alt="{{ $blog->title }}" class="w-full h-40 object-cover">
+          <div class="card-body">
+            <h3 class=" font-bold text-2xl ">{{ $blog->title }}</h3>
+            <p>{{ $blog->excerpt }}</p>
+            <div class="flex justify-end"><a href="{{ route('blog.details', $blog->slug) }}" class="bg-neutral-400  inline-block rounded-full bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] m-3 ">Read More</a></div>
+          </div>
+        </div>
+        @endforeach
+
+    </section>
+  </main>
+
+  <footer class="bg-neutral-400 h-11 w-auto flex justify-center py-3 ">
+    <p class=" inline-block ">&copy;{{ date('Y') }} LaraBlogs | All rights reserved.</p>
+  </footer>
 </body>
+
 </html>

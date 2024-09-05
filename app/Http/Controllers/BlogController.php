@@ -10,7 +10,8 @@ class BlogController extends Controller
 {
     public function index()
     {
-        return view('blog.index');
+        $blogs = Blog::all();
+        return view('blog.index', compact('blogs')) ;
     }
 
     public function create()
@@ -46,5 +47,12 @@ class BlogController extends Controller
         return back()->with('success', 'Blog Created Successfully');
 
        
+    }
+
+    public function blogDetails($slug)
+    {
+        $blog = Blog::where('slug', $slug)->first();
+        return view('blog.details', compact('blog'));
+        
     }
 }
